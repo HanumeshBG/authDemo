@@ -1,0 +1,43 @@
+﻿<!DOCTYPE html>
+	<html lang='en'>
+		<header>
+            <title>Leave Management</title>
+			<meta charset = "utf-8">
+	        <meta name = "viewport" content = "width: device-width, initial-scale = 1">
+			<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.css" />
+			<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+			<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.js"></script>
+            <script type="text/javascript" src="/javascripts/calendar.js"></script>
+            <script type="text/javascript" src="/javascripts/leave.js"></script>
+            <script type="text/javascript" src="/javascripts/adminSetting.js"></script>
+            <link type="text/css" href="/stylesheets/main.css" rel="stylesheet" />
+
+</head>
+		<body>
+           <nav class="nav navbar-default" id="navbar">
+				<div class="container-fluid">
+					<div class="navbar-header">
+						<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span> 
+						</button>
+						<a class="navbar-brand" href="/home/dashboard">Home</a>
+					</div>
+					<div class="collapse navbar-collapse" id="myNavbar">
+						<ul class="nav navbar-nav navbar-right">
+                            <li id="homeLeaveDetailBtn"><a href="/home/leaveDetails"> Leave Details</a></li>
+                            <li id="homeApplyLeaveBtn"><a href="/home/applyleave"><span class="glyphicon glyphicon-plus-sign"></span> Apply Leave</a></li>
+                            <li id="homeSettingBtn"><a href="/home/setting"><span class="glyphicon glyphicon-cog"></span> Setting </a></li>
+                            <li id="homeProfileLeaveBtn"><a href="/home/profile"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
+                            <li><a href="/logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+						</ul>	
+					</div>
+				</div>
+			</nav>
+
+  

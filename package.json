@@ -1,0 +1,30 @@
+{
+  "name": "auth-demo",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node app"
+  },
+  "description": "authDemo",
+  "author": {
+    "name": ""
+  },
+  "dependencies": {
+    "body-parser": "^1.15.0",
+    "cookie-parser": "^1.4.0",
+    "debug": "^2.2.0",
+    "ejs": "^2.7.1",
+    "express": "^4.14.0",
+    "express-session": "^1.17.0",
+    "jquery": "^3.4.1",
+    "moment": "^2.24.0",
+    "morgan": "^1.7.0",
+    "mysql": "^2.17.1",
+    "pug": "^2.0.0-beta6",
+    "routes": "^2.1.0",
+    "serve-favicon": "^2.3.0"
+  },
+  "engines": {
+    "node": "~6.10.x"
+  }
+}

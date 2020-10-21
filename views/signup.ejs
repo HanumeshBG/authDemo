@@ -1,0 +1,41 @@
+﻿<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+<link href="/stylesheets/main.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="/javascripts/leave.js"></script>
+<h1 class="text-center"> This is Signup Page </h1>
+<div id="signupForm">
+    <form action="/signup" method="POST">
+      <div class="form-group">
+        <input id="first_name" class="form-control" type="text" name="first_name" placeholder="Enter First Name" required></input>
+      </div>
+      <div class="form-group">
+        <input id="last_name" class="form-control" type="text" name="last_name" placeholder="Enter Last Name" required></input>
+      </div>
+      <div class="form-group">
+        <select id="gender" class="form-control" name="gender" required>
+            <option disabled selected value="">Select the Gender</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <input id="mob_no" class="form-control" type="text" name="mob_no" placeholder="Enter Mobile Number" required></input>
+      </div>
+      <div class="form-group">
+        <input id="user_name" class="form-control" type="text" name="user_name" placeholder="Enter User Name" required></input>
+        <span id="userVerification"></span>
+      </div>   
+      <div class="form-group">
+        <input id="password" class="form-control" type="password" name="password" placeholder="Enter your Password" required></input>
+      </div>
+      <div>
+        <button class="btn btn-primary">Submit</button>
+      </div>
+    </form>
+
+    <p>
+        Do you have Account? <a href="/login"> Login</a>
+    </p>
+</div>

@@ -1,0 +1,74 @@
+﻿<%- include partial/header %>
+<div class="continer" id="leaveDetailsPerson">
+     <div class="row">
+        <div class="leaveCounts col-sm-5">
+            <span class="leavesCountLabel">Total Number of Leaves: </span>
+            <span id="tnl"></span>
+        </div>
+        <div class="leaveCounts col-sm-5">
+            <span class="leavesCountLabel">Total Number of carry forward Leaves: </span>
+            <span id="tncfl"></span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="leaveCounts col-sm-3">
+            <span class="leavesCountLabel">Total Casual Leaves: </span>
+            <span id="tcl"></span>
+        </div>
+        <div class="leaveCounts col-sm-3">
+            <span class="leavesCountLabel">Total Applied Casual Leaves: </span>
+            <span id="tacl"><%= leavedetailforuser[0].casual %></span>
+        </div>
+        <div class="leaveCounts col-sm-3">
+            <span class="leavesCountLabel">Remaining Casual Leaves: </span>
+            <span id="rcl"></span>
+        </div>
+    </div>  
+    <div class="row">
+        <div class="leaveCounts col-sm-3">
+            <span class="leavesCountLabel">Total Sick Leaves: </span>
+            <span id="tsl"></span>
+        </div>
+        <div class="leaveCounts col-sm-3">
+            <span class="leavesCountLabel">Total Applied Sick Leaves: </span>
+            <span id="tasl"><%= leavedetailforuser[0].sick %></span>
+        </div>
+        <div class="leaveCounts col-sm-3">
+            <span class="leavesCountLabel">Remaining Sick Leaves: </span>
+            <span id="rsl"></span>
+        </div>
+    </div>  
+    <div class="row">
+        <div class="leaveCounts col-sm-3">
+            <span class="leavesCountLabel">Total Personal Leaves: </span>
+            <span id="tpl"></span>
+        </div>
+        <div class="leaveCounts col-sm-3">
+            <span class="leavesCountLabel">Total Applied Personal Leaves: </span>
+            <span id="tapl"><%= leavedetailforuser[0].personal %></span>
+        </div>
+        <div class="leaveCounts col-sm-3">
+            <span class="leavesCountLabel">Remaining Personal Leaves: </span>
+            <span id="rpl"></span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="leaveCounts col-sm-3">
+            <span class="leavesCountLabel">Total Other Leaves: </span>
+            <span id="tol"></span>
+        </div>
+        <div class="leaveCounts col-sm-3">
+            <span class="leavesCountLabel">Total Applied Other Leaves: </span>
+            <span id="taol"><%= leavedetailforuser[0].other %></span>
+        </div>
+        <div class="leaveCounts col-sm-3">
+            <span class="leavesCountLabel">Remaining Other Leaves: </span>
+            <span id="rol"></span>
+        </div>
+    </div>
+</div>
+
+       
+
+
+<%- include partial/footer %>

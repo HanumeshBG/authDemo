@@ -1,0 +1,60 @@
+﻿<%- include partial/header %>
+<div class="container">
+    <form class="form-horizontal" action="/home/setting" method="post" id="adminSetting">
+       <div class="form-group row">
+           <label class="col-sm-3" for="slCounts">Total Sick Leave:</label>
+           <div id="slCounts">
+                <div class="col-sm-3" id="tsickcount">
+                    <input class="form-control" type="text" name="tsickcount" value="" placeholder="Enter total number of leaves" required />
+                </div>
+                <div class="col-sm-3" id="cfsickcount">
+                    <input class="form-control" type="text" name="cfsickcount" value="" placeholder="Enter total number of leaves carryforward" required />
+                </div>
+           </div>          
+       </div>
+        <div class="form-group row">
+           <label class="col-sm-3" for="clCounts">Total Casual Leave:</label>
+           <div id="clCounts">
+                <div class="col-sm-3" id="tcasualcount">
+                    <input class="form-control" type="text" name="tcasualcount" value="" placeholder="Enter total number of leaves" required />
+                </div>
+                <div class="col-sm-3" id="cfcasualcount">
+                    <input class="form-control" type="text" name="cfcasualcount" value="" placeholder="Enter total number of leaves carryforward" required />
+                </div>
+           </div>          
+       </div>
+        <div class="form-group row">
+           <label class="col-sm-3" for="plCounts">Total Personal Leave:</label>
+           <div id="plCounts">
+                <div class="col-sm-3" id="tpersonalcount">
+                    <input class="form-control" type="text" name="tpersonalcount" value="" placeholder="Enter total number of leaves" required />
+                </div>
+                <div class="col-sm-3" id="cfpersonalcount">
+                    <input class="form-control" type="text" name="cfpersonalcount" value="" placeholder="Enter total number of leaves carryforward" required />
+                </div>
+           </div>          
+       </div>
+        <div class="form-group row">
+           <label class="col-sm-3" for="olCounts">Total Other Leave:</label>
+           <div id="olCounts">
+                <div class="col-sm-3" id="tothercount">
+                    <input class="form-control" type="text" name="tothercount" value="" placeholder="Enter total number of leaves" required />
+                </div>
+                <div class="col-sm-3" id="cfothercount">
+                    <input class="form-control" type="text" name="cfothercount" value="" placeholder="Enter total number of leaves carryforward" required />
+                </div>
+           </div>          
+       </div>
+       <div class="form-group row">
+           <label class="col-sm-3" for="maternitycount">Total Other Leave:</label>
+           <div id="maternitycount">
+                <div class="col-sm-3" id="tmaternitycount">
+                    <input class="form-control" type="text" name="tmaternitycount" value="" placeholder="Enter total number of maaternity leaves" required />in days
+                </div>
+           </div>          
+       </div>
+        <div>
+             <button id="settingUpdateBtn" type="submit" class="btn btn-primary">Update</button>
+        </div>
+    </form>
+</div>

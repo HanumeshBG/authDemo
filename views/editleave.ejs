@@ -1,0 +1,101 @@
+﻿ <%- include partial/header %>
+
+<div class="container">
+    <form class="form-horizontal" action="/home/applyleave/edit?lid=<%= leave[0].lid %>" method="POST" id="editLeaveForm">
+        <div class="form-group row">
+            <label class="col-sm-3" for="sel1">Name: </label>
+            <div class="col-sm-9">
+                <select class="form-control" id="sel1" name="full_name" value="<%= leave[0].full_name %>">
+                        <option> <%= leave[0].full_name %></option>
+                </select>
+            </div>       
+        </div>
+        <input type="hidden" id="selectedUser" name="selectedUser" value="<%= leave[0].id %>" />
+       <div class="form-group row">
+           <label class="col-sm-3" for="l_reason">Leave Reason:</label>
+           <div class="col-sm-9" id="l_reason">
+                <input class="form-control" type="text" name="l_reason" value="<%= leave[0].holiday_reason %>" />
+           </div>
+       </div>
+       <div class="form-group row">
+           <label class="col-sm-3" for="l_status">Leave Status:</label>
+           <div class="col-sm-9">
+                <ul class="donate-now edit-leave" id="l_status">
+                  <li>
+                    <input type="radio" id="applied" name="l_status" value="applied" checked="checked" />
+                    <label for="applied">Applied</label>
+                  </li>
+                  <li>
+                    <input type="radio" id="approved" name="l_status" value="approved" disabled />
+                    <label for="approved">Approved</label>
+                  </li>
+                  <li>
+                    <input type="radio" id="rejected" name="l_status" value="rejected" disabled />
+                    <label for="rejected">Rejected</label>
+                  </li>
+                </ul>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-3" for="l_category">Leave Category:</label>
+            <div class="col-sm-9">
+                <ul class="donate-now edit-leave" id="l_category">
+                  <li>
+                    <input type="radio" id="casual" name="l_category" value="casual" required />
+                    <label for="casual">Casual</label>
+                  </li>
+                  <li>
+                    <input type="radio" id="sick" name="l_category" value="sick" />
+                    <label for="sick">Sick</label>
+                  </li>
+                  <li>
+                    <input type="radio" id="personal" name="l_category" value="personal" />
+                    <label for="personal">Personal</label>
+                  </li>
+                  <li>
+                    <input type="radio" id="others" name="l_category" value="other" />
+                    <label for="others">Other</label>
+                  </li>
+                  <li id="li_maternity">
+                    <input type="radio" id="maternity" name="l_category" value="maternity" />
+                    <label for="maternity">Maternity</label>
+                  </li>
+                </ul>
+            </div>
+        </div>
+        <div id="divForMaternityLabel" class="form-group row" hidden>
+            <label class="col-sm-9 offset-sm-3"> You can apply upto <span id="spanForMaternityDays"></span> days maternity leave without loss of pay.</label>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-3" for="l_date">Date Duration:</label>
+            <div class="col-sm-9" id="l_date">
+                From:
+                <input id="startdate" type="date" name="l_sdate" value="" />
+                TO:
+                <input id="enddate" type="date" name="l_edate" value="" />
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-3" for="l_description">Leave Description:</label>
+            <div class="col-sm-9" id="l_description">
+                <input class="form-control" type="text" name="l_description" value="<%= leave[0].description %>" />
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-3" for="l_files">Files:</label>
+            <input type="file" id="l_files" class="col-sm-9" name="files" value=""/>
+        </div>
+        <div>
+            <button id="leaveUpdateBtn" type="submit" class="btn btn-primary">Update</button>
+            <a href="/home/applyleave/edit/delete"><button id="leaveDeleteBtn" type="button" class="btn btn-primary">Delete</button></a>
+        </div>    
+    </form>
+    
+</div>
+<div id="l_c" data-test-value="<%= leave[0].category %>"></div>
+<div id="l_s" data-test-value="<%= leave[0].status %>"></div>
+<div id="l_s_d" data-test-value="<%= leave[0].start_date %>"></div>
+<div id="l_e_d" data-test-value="<%= leave[0].end_date %>"></div>
+<div id="userid" data-test-value="<%= leave[0].id %>"></div>
+<div id="l_l_files" data-test-value="<%= leave[0].files %>"></div>
+<input id="adminValue" type="hidden" value=""/>

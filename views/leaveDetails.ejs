@@ -1,0 +1,28 @@
+﻿<%- include partial/header %>
+<div class="container-fluid" id="leaveDetails">
+    <div class="leavesHeader">
+        <div class="leaveCounts">
+            <span class="leavesCountLabel">Total Leaves: </span>
+            <span><%= leaveCountDetails[0].tslcount + leaveCountDetails[0].tclcount + leaveCountDetails[0].tplcount + leaveCountDetails[0].tolcount %></span>
+        </div>
+        <div class="leaveCounts">
+            <span class="leavesCountLabel">Total Sick Leaves: </span>
+            <span><%= leaveCountDetails[0].tslcount %></span>
+        </div>
+        <div class="leaveCounts">
+            <span class="leavesCountLabel">Total Casual Leaves: </span>
+            <span><%= leaveCountDetails[0].tclcount %></span>
+        </div>
+        <div class="leaveCounts">
+            <span class="leavesCountLabel">Total Personal Leaves: </span>
+            <span><%= leaveCountDetails[0].tplcount %></span>
+        </div>
+        <div class="leaveCounts">
+            <span class="leavesCountLabel">Total Other Leaves: </span>
+            <span><%= leaveCountDetails[0].tolcount %></span>
+        </div>
+    </div>
+    <div id="leavesDetailsTableDiv">
+    </div>
+</div>
+<%- include partial/footer %>

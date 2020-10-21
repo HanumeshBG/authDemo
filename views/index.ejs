@@ -1,0 +1,22 @@
+﻿<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+<link href="/stylesheets/main.css" type="text/css" rel="stylesheet" />
+<h1 class="text-center"> Welcome to Leave Management System </h1>
+
+<div class="container">
+    <div id="loginform">
+        <form action="/login" method="POST">
+          <div class="form-group">
+            <input class="form-control" type="text" name="user_name" placeholder="Enter User Name"></input>
+          </div>
+          <div class="form-group">
+            <input class="form-control" type="password" name="password" placeholder="Enter your Password"></input>
+          </div>
+          <div>
+            <button class="btn btn-primary">Login</button>
+          </div>
+        </form>
+        <p> Do not have account? <a href="/signup"> Sign up</a> </p>
+    </div>
+</div>
