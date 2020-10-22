@@ -16,10 +16,11 @@
     "ejs": "^2.7.1",
     "express": "^4.14.0",
     "express-session": "^1.17.0",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.1",
     "moment": "^2.24.0",
     "morgan": "^1.7.0",
     "mysql": "^2.17.1",
+    "nodemon": "^2.0.6",
     "pug": "^2.0.0-beta6",
     "routes": "^2.1.0",
     "serve-favicon": "^2.3.0"
