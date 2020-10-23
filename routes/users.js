@@ -146,24 +146,23 @@ exports.applyleave = function (req, res) {
             var hreason = req.body.l_reason;
             var desc = req.body.l_description;
             var selUId = req.body.selectedUser;
-            var file = req.body.files;
+            var files = req.body.files;
             var oneday = 24 * 60 * 60 * 1000;
             var numDays = Math.round(Math.abs((new Date(sdate) - new Date(edate)) / oneday)) + 1;
-            
-            var sqlquery = "INSERT INTO leaves(id, full_name, holiday_reason , status, category, start_date, end_date, description,number_days,files) VALUES('" + selUId + "','" + name + "', '" + hreason + "', '" + status + "', '" + category + "', '" + sdate + "', '" + edate + "', '" + desc + "', '" + numDays + "', '" + file + "'); ";
+            var sqlquery = "INSERT INTO leaves(id, full_name, holiday_reason , status, category, start_date, end_date, description,number_days,files) VALUES('" + selUId + "','" + name + "', '" + hreason + "', '" + status + "', '" + category + "', '" + sdate + "', '" + edate + "', '" + desc + "', '" + numDays + "', '" + files + "'); ";
 
-            db.query(sqlquery, function (err, result) {
-                if (err) {
-                    console.log(err);
-                } else {
-                    message = "leave applied successfully"
-                    updateLeavecountTable(category, numDays, selUId);
-                    updateLeaveStatusCountTable(status,selUId, numberofleave);
-                    getUsers(selectsql, function (result) {
-                    res.render("applyleave", { Uname: result });
-                    });
-                }
-            });
+                db.query(sqlquery, function (err, result) {
+                    if (err) {
+                            console.log(err);
+                    } else {
+                        message = "leave applied successfully"
+                        updateLeavecountTable(category, numDays, selUId);
+                        updateLeaveStatusCountTable(status,selUId, numberofleave);
+                        getUsers(selectsql, function (result) {
+                        res.render("applyleave", { Uname: result });
+                        });
+                    }
+                });
         } else {
             getUsers(selectsql, function (result) {
                 res.render("applyleave", { Uname: result });

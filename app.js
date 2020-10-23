@@ -11,6 +11,7 @@ var moment = require('moment');
 
 global.db = connection;
 
+//middlewares
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(express.static(__dirname + '/public'));// To connect external static files.
@@ -22,6 +23,8 @@ app.use(session({
     cookie: { maxAge: 600000 }
 }));
 
+
+//routes
 app.get("/", routes.index);
 app.get("/events", events.eventsRender);
 app.get("/signup", users.signup);// call for signup page

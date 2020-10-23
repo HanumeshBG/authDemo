@@ -363,7 +363,7 @@ $(document).ready(function () {
 
     //image preview
     var fileTypes = ['jpg', 'jpeg', 'png'];  //acceptable file types
-    $("input:file").change(function (evt) {
+    $("input:file").on('chaange', function (evt) {
         var parentEl = $("#displayArea");
         var tgt = evt.target || window.event.srcElement,
             files = tgt.files;
