@@ -120,6 +120,7 @@ exports.profile = function (req, res) {
         res.render("profile", { data: result });
     });
 };
+
 //------------------- Apply Leave -------------
 exports.applyleave = function (req, res) {
     var userId = req.session.userId;
@@ -146,10 +147,16 @@ exports.applyleave = function (req, res) {
             var hreason = req.body.l_reason;
             var desc = req.body.l_description;
             var selUId = req.body.selectedUser;
-            var files = req.body.files;
+            var files1 = req.files.uploadfiles;
+
             var oneday = 24 * 60 * 60 * 1000;
             var numDays = Math.round(Math.abs((new Date(sdate) - new Date(edate)) / oneday)) + 1;
-            var sqlquery = "INSERT INTO leaves(id, full_name, holiday_reason , status, category, start_date, end_date, description,number_days,files) VALUES('" + selUId + "','" + name + "', '" + hreason + "', '" + status + "', '" + category + "', '" + sdate + "', '" + edate + "', '" + desc + "', '" + numDays + "', '" + files + "'); ";
+            var sqlquery = "INSERT INTO leaves(id, full_name, holiday_reason , status, category, start_date, end_date, description,number_days,files) VALUES('" + selUId + "','" + name + "', '" + hreason + "', '" + status + "', '" + category + "', '" + sdate + "', '" + edate + "', '" + desc + "', '" + numDays + "', '" + files1.name + "'); ";
+
+
+            files1.mv('public/images/uploadImages/'+files1.name, function(err) {
+                if (err)
+                  return res.status(500).send(err);
 
                 db.query(sqlquery, function (err, result) {
                     if (err) {
@@ -163,6 +170,7 @@ exports.applyleave = function (req, res) {
                         });
                     }
                 });
+            });
         } else {
             getUsers(selectsql, function (result) {
                 res.render("applyleave", { Uname: result });
@@ -288,3 +296,6 @@ function updateLeaveStatusCountTable(status, selUId, numberofleave) {
         }
     });
 };
+
+
+//------------------------

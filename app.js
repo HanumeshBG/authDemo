@@ -6,6 +6,7 @@ var users = require('./routes/users');
 var events = require('./routes/events');
 var connection = require("./config");
 var session = require('express-session');
+const fileUpload = require('express-fileupload');
 var $ = require('jquery');
 var moment = require('moment');
 
@@ -22,7 +23,7 @@ app.use(session({
     saveUninitialized: true,
     cookie: { maxAge: 600000 }
 }));
-
+app.use(fileUpload());
 
 //routes
 app.get("/", routes.index);
