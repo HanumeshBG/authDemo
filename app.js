@@ -7,6 +7,7 @@ var events = require('./routes/events');
 var connection = require("./config");
 var session = require('express-session');
 const fileUpload = require('express-fileupload');
+const path = require('path');
 var $ = require('jquery');
 var moment = require('moment');
 
@@ -15,8 +16,10 @@ global.db = connection;
 //middlewares
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use(express.static(__dirname + '/public'));// To connect external static files.
+//app.use(express.static(__dirname + '/public'));// To connect external static files.
+app.use(express.static(path.join(__dirname,'public')));// To connect external static files.
 app.set("view engine", "ejs");
+app.set('views', path.join(__dirname,'/views'));// to access views from outside the root folder
 app.use(session({
     secret: 'keyboard cat',
     resave: false,
