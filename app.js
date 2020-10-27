@@ -61,6 +61,10 @@ app.get('/home/leaveDetails/view', events.leaveDetailsView);//Call to leave deta
 app.post('/home/leaveDetails/onload', events.loadLeavesDetails);// call to load the leave detials for all the users on loading page
 app.post('/home/leave/gender', events.getGender);//Call to get gender
 
+app.get('*', (req,res) => {
+    res.status(500).send("WEB PAGE NOT AVAILABLE....");
+});
+
 app.listen(3010, function (req, res) {
     console.log('Server started..');
 });
