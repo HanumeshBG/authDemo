@@ -8,6 +8,7 @@ var connection = require("./config");
 var session = require('express-session');
 const fileUpload = require('express-fileupload');
 const path = require('path');
+const appError = require('./appError');
 var $ = require('jquery');
 var moment = require('moment');
 
@@ -60,11 +61,19 @@ app.post('/home/dashboard/bulkUpdateLeaves', events.bulkUpdate);//Bulk approve l
 app.get('/home/leaveDetails/view', events.leaveDetailsView);//Call to leave details of select person
 app.post('/home/leaveDetails/onload', events.loadLeavesDetails);// call to load the leave detials for all the users on loading page
 app.post('/home/leave/gender', events.getGender);//Call to get gender
-
-app.get('*', (req,res) => {
-    res.status(500).send("WEB PAGE NOT AVAILABLE....");
+app.get('*', function(req,res){
+    throw new appError(404,'Web Page Not Found..');
+});
+//Error handling middleware
+app.use(function(err,req,res,next){
+    const { status = 500, message = 'Something went wrong!'} = err;
+    console.log('*************** Error *************');
+    console.log(err);
+    console.log('**********************************');
+    res.status(status).render('error',{ err : err});
 });
 
+//Listen to the port
 app.listen(3010, function (req, res) {
     console.log('Server started..');
 });
