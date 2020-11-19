@@ -95,26 +95,15 @@ exports.dashboard = function (req, res) {
     var userId = req.session.userId;
     var user = req.session.user;
     var id = req.query.id;
-
-    if (userId == null) {
-        res.render("index");
-        return;
-    } else {
         var sql = "SELECT * FROM users ;";
         db.query(sql, function (err, result) {
             res.render("dashboard", { activeuserName: activeuserName, users: result });
         });
-    }
 };
 
 //----------------- Profile -----------------
 exports.profile = function (req, res) {
     var userId = req.session.userId;
-    if (userId == null) {
-        res.redirect("/login");
-        return;
-    }
-
     var sql = "SELECT * FROM users where id = '" + userId + "';";
     db.query(sql, function(err, result) {
         res.render("profile", { data: result });
@@ -133,11 +122,6 @@ exports.applyleave = function (req, res) {
           return callback(result);
         });
     }; 
-
-    if (userId == null) {
-        res.redirect("/login");
-        return;
-    } else {
         if (req.method == "POST") {
             var status = req.body.l_status;
             var category = req.body.l_category;
@@ -177,7 +161,7 @@ exports.applyleave = function (req, res) {
             });
             
         }
-    }
+    
 };
 
 //----------------- Get Users List ----------------

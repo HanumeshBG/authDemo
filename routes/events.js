@@ -30,15 +30,8 @@ exports.eventsRender = function (req, res) {
 
 //----------------- Get Leave details --------------
 exports.userEvents = function (req, res) {
-    
-    var userId = req.session.userId;
-    var user = req.session.user;
     eventId = req.query.lid;
     
-    if (userId == null) {
-        res.render("index");
-        return;
-    } else {
         var sql = "SELECT * FROM leaves WHERE lid ='" + eventId +"';";
         db.query(sql, function (err, results) {
             if (err) {
@@ -51,13 +44,10 @@ exports.userEvents = function (req, res) {
                 res.render('editleave', { leave: results });
             }
         });
-    }
 };
 
 //------------------------- Update Leave --------------------
 exports.editLeave = function (req, res) {
-     var userId = req.session.userId;
-     var user = req.session.user;
      var eventId = req.query.lid;
      var selUId = req.body.selectedUser;
      var status = req.body.l_status;
@@ -88,10 +78,6 @@ exports.editLeave = function (req, res) {
          });
     }; 
 
-    if (userId == null) {
-        res.render('index');
-        return;
-    } else {
         calculateDaysDiff(selectQueryNumDays, function (result3) {
             var daysDiff = result3;
             var leaveDetails = {
@@ -123,9 +109,6 @@ exports.editLeave = function (req, res) {
                 }
             });
         })
-        
-    }
-
 }; 
 //-------------------- Delete leave ------------------------------
 exports.delete = function (req, res) {
@@ -254,11 +237,6 @@ exports.bulkUpdate = function (req, res) {
 
 //--------------------------------- Admin Setting page -------------------
 exports.adminSetting = function (req, res) {
-    var UserId = req.session.userId;
-    if (UserId == null) {
-        res.redirect('/login');
-        return;
-    } else {
         if (req.method == 'POST') {
             var setting = {
                 tslcount: req.body.tsickcount,
@@ -283,7 +261,6 @@ exports.adminSetting = function (req, res) {
         } else {
             res.render("adminSetting");
         }
-    }
 };
 
 //------------------------- Get values from the admin settings ---------------
@@ -300,11 +277,6 @@ exports.getValues = function (req, res) {
 
 //--------------------------- Retrieve leave Details page ------------------
 exports.leaveDetails = function (req, res) {
-    var UserId = req.session.userId;
-    if (UserId == null) {
-        res.redirect('/login');
-        return;
-    } else {
         var selquery = "SELECT * FROM adminsetting";
         db.query(selquery, function (err, result) {
             if (err) {
@@ -313,7 +285,6 @@ exports.leaveDetails = function (req, res) {
                 res.render("leaveDetails", { leaveCountDetails:result });
             }
         });
-    }
 };
 
 //------------------------ Retrieve Leave details for all users --------------
@@ -330,12 +301,8 @@ exports.loadLeavesDetails = function (req, res) {
 
 //----------------------- Retrieve Leave Details of Clicked(Selected) person -------------
 exports.leaveDetailsView = function (req, res) {
-    var UserId = req.session.userId;
     var selectedUser = req.query.id;
-    if (UserId == null) {
-        res.redirect('/login');
-        return;
-    } else {
+   
         var sql = "SELECT * FROM leavecounts WHERE uid ='" + selectedUser + "';";
         db.query(sql, function (err, results) {
             if (err) {
@@ -344,7 +311,6 @@ exports.leaveDetailsView = function (req, res) {
                 res.render('leaveDetailsPerson', { leavedetailforuser: results });
             }
         });
-    }
 }
 
 //-------------------- Retrieve gender  -------------------
