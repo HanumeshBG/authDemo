@@ -9,9 +9,12 @@ var session = require('express-session');
 const fileUpload = require('express-fileupload');
 const path = require('path');
 const appError = require('./appError');
+const commonFunction = require('./routes/commonFunction');
+//var mw = require('./customMiddlewares');
 var $ = require('jquery');
 var moment = require('moment');
 
+global.cf = commonFunction; //Global variable to access common function across the app
 global.db = connection;
 
 //middlewares
@@ -27,7 +30,9 @@ app.use(session({
     saveUninitialized: true,
     cookie: { maxAge: 600000 }
 }));
+
 app.use(fileUpload());
+
 const checkUserSession = function(req,res,next){
     if(req.session.userId == null){
         throw new appError(401," Your Session is Expired please login back..");

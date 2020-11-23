@@ -99,9 +99,9 @@ exports.editLeave = function (req, res) {
                     console.log(err);
                 } else {
                     console.log("Leave updated successfully")
-                    updateLeavecountTable(category, daysDiff, selUId);
+                    cf.updateLeavecountTable(category, daysDiff, selUId);
                     if (status != 'applied') {
-                        updateLeaveStatusCountTable(status, selUId, numberofleave);
+                        cf.updateLeaveStatusCountTable(status, selUId, numberofleave);
                     }
                     getUsers(selectsql, function (result1) {
                         res.render('applyleave', { Uname: result1 });
@@ -118,8 +118,8 @@ exports.delete = function (req, res) {
         if (err) {
             console.log(err);
         } else {
-            updateLeavecountTable(category, -(numberDays), selUId);
-            updateLeaveStatusCountTable(status, selUId, -(numberofleave));
+            cf.updateLeavecountTable(category, -(numberDays), selUId);
+            cf.updateLeaveStatusCountTable(status, selUId, -(numberofleave));
             res.redirect("/home/dashboard");
         }
 
@@ -203,7 +203,7 @@ exports.loadLeaveUserCount = function (req, res) {
 
 //----------------Reject leave by admin ---------------------
 exports.rejectLeave = function (req, res) {
-    updateLeavecountTable(category, -(numberDays), selUId);  
+    cf.updateLeavecountTable(category, -(numberDays), selUId);  
 };
 
 //--------------- Bulk approve leaves ------------------------
@@ -223,9 +223,9 @@ exports.bulkUpdate = function (req, res) {
                         console.log(err);
                     } else {
                         for (var i = 0; i < result1.length; i++) {
-                            updateLeaveStatusCountTable(status, result1[i].id, numberofleave);
+                            cf.updateLeaveStatusCountTable(status, result1[i].id, numberofleave);
                             if (status == 'rejected') {
-                                updateLeavecountTable(result1[i].category, -(result1[i].number_days), result1[i].id);
+                               cf.updateLeavecountTable(result1[i].category, -(result1[i].number_days), result1[i].id);
                             }
                         }
                         res.send("Leaves "+ status + " successfully..");
@@ -325,73 +325,3 @@ exports.getGender = function (req, res) {
             }
         });
 }
-
-//-------------- update leaveCounts table -------------------
-function updateLeavecountTable(category, numDays, selUId) {
-    var selectQuery = "SELECT total," + category + " FROM leavecounts WHERE uid ='" + selUId + "';";
-    db.query(selectQuery, function (err, result) {
-        if (err) {
-            console.log(err);
-        } else {
-            var leavecount = 0;
-            var totalcount = 0;
-            if (category == 'sick') {
-                leavecount = result[0].sick + numDays;
-            } else if (category == 'casual') {
-                leavecount = result[0].casual + numDays;
-            } else if (category == 'personal') {
-                leavecount = result[0].personal + numDays;
-            } else if (category == 'other') {
-                leavecount = result[0].other + numDays;
-            } else {
-                leavecount = result[0].maternity + numDays;
-            }
-
-            if (category == 'maternity') {
-                totalcount = result[0].total;
-            } else {
-                totalcount = result[0].total + numDays;
-            }
-
-            var selectQuery1 = "UPDATE leavecounts SET " + category + "='" + leavecount + "', total ='" + totalcount + "' WHERE uid ='" + selUId + "';";
-            db.query(selectQuery1, function (err, result1) {
-                if (err) {
-                    console.log(err);
-                } else {
-                    console.log("Leavecounts database updated successfully.")
-                }
-            });
-        }
-    });
-};
-
-//------------------------------- Update leavestatuscount Table -------------
-function updateLeaveStatusCountTable(status, selUId, numberofleave) {
-    var selectQuery = "SELECT * FROM leavestatuscount WHERE id ='" + selUId + "';";
-    db.query(selectQuery, function (err, result) {
-        if (err) {
-            console.log(err);
-        } else {
-            var statuscount;
-            var statusname;
-            if (status == 'applied') {
-                statuscount = result[0].appliedleavecount + numberofleave;
-                statusname = 'appliedleavecount';
-            } else if(status == 'approved') {
-                statuscount = result[0].approvedleavecount + numberofleave;
-                statusname = 'approvedleavecount';
-            } else {
-                statuscount = result[0].rejectedleavecount + numberofleave;
-                statusname = 'rejectedleavecount';
-            }
-            var selectQuery1 = "UPDATE leavestatuscount SET "+ statusname +"='" + statuscount + "' WHERE id ='" + selUId + "';";
-            db.query(selectQuery1, function (err, result1) {
-                if (err) {
-                    console.log(err);
-                } else {
-                    console.log("LeaveStatuscount database updated successfully.")
-                }
-            });
-        }
-    });
-};
