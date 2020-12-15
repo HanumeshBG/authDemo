@@ -1,0 +1,69 @@
+CREATE TABLE IF NOT EXISTS `users` (
+  `id` int(5) NOT NULL AUTO_INCREMENT,
+  `first_name` varchar(50) NOT NULL,
+  `last_name` varchar(50) NOT NULL,
+  `mob_no` bigint(15) NOT NULL,
+  `user_name` varchar(100) NOT NULL,
+  `password` varchar(15) NOT NULL,
+  `gender` varchar(20) NOT NULL,
+  PRIMARY KEY (`id`)
+);
+
+********
+
+CREATE TABLE IF NOT EXISTS `leaves` (
+  `id` int(5) NOT NULL,
+  `lid` int(5) NOT NULL AUTO_INCREMENT,
+  `full_name` varchar(255) NOT NULL,
+  `holiday_reason` varchar(255) NOT NULL,
+  `status` varchar(255) NOT NULL,
+  `category` varchar(255) NOT NULL,
+  `start_date` date,
+  `end_date` date,
+  `description` varchar(255) NOT NULL,
+  `number_days` int(11) NOT NULL,
+  `files` longblob,
+  PRIMARY KEY (`lid`),
+  FOREIGN KEY (`id`) REFERENCES users(`id`)
+);
+
+**********
+
+CREATE TABLE IF NOT EXISTS `leavecounts` (
+  `lc_id` int(11) NOT NULL AUTO_INCREMENT,
+  `uid` int(11) NOT NULL,
+  `sick` int(11) NOT NULL,
+  `casual` int(11) NOT NULL,
+  `personal` int(11) NOT NULL,
+  `other` int(11) NOT NULL,
+  `maternity` int(11) NOT NULL,
+  `total` int(11) NOT NULL,
+  PRIMARY KEY (`lc_id`),
+  FOREIGN KEY (`uid`) REFERENCES users(`id`)
+);
+
+**********
+
+CREATE TABLE IF NOT EXISTS `leavestatuscount` (
+  `lsc_id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
+  `appliedleavecount` int(11) NOT NULL,
+  `approvedleavecount` int(11) NOT NULL,
+  `rejectedleavecount` int(11) NOT NULL,
+  PRIMARY KEY (`lsc_id`),
+  FOREIGN KEY (`id`) REFERENCES users(`id`)
+);
+
+************
+
+CREATE TABLE IF NOT EXISTS `adminsetting` (
+  `tslcount` int(11) NOT NULL,
+  `cfslcount` int(11) NOT NULL,
+  `tclcount` int(11) NOT NULL,
+  `cfclcount` int(11) NOT NULL,
+  `tplcount` int(11) NOT NULL,
+  `cfplcount` int(11) NOT NULL,
+  `tolcount` int(11) NOT NULL,
+  `cfolcount` int(11) NOT NULL,
+  `maternitycount` int(11) NOT NULL
+);
