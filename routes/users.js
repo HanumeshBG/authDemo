@@ -66,19 +66,29 @@ exports.login = function (req, res) {
         var name = req.body.user_name;
         var psw = req.body.password;
 
-        var selectQuery = "SELECT id, first_name, last_name,user_name from users where user_name='" + name + "' and password = '" + psw + "';";
-        db.query(selectQuery, function (err, result) {
-            if (result.length > 0) {
-                req.session.userId = result[0].id;
-                req.session.user = result[0];
-                activeuserName = result[0].user_name;
-                console.log(result[0]);
-                res.redirect("/home/dashboard");
-            } else {
-                message = "Wrong Credential";
-                res.render("index", {message:message});
-            }
-        });
+        //check for admin login
+        if(name.toLowerCase() == 'admin' && psw.toLowerCase() == 'admin') {
+            console.log('***Loggedin asAdmin***');
+            req.session.userId = 'A1';
+            req.session.user = name;
+            activeuserName = 'admin';
+            res.redirect("/home/dashboard");
+        } else {
+
+            var selectQuery = "SELECT id, first_name, last_name,user_name from users where user_name='" + name + "' and password = '" + psw + "';";
+            db.query(selectQuery, function (err, result) {
+                if (result.length > 0) {
+                    req.session.userId = result[0].id;
+                    req.session.user = result[0];
+                    activeuserName = result[0].user_name;
+                    console.log(result[0]);
+                    res.redirect("/home/dashboard");
+                } else {
+                    message = "Wrong Credential";
+                    res.render("index", {message:message});
+                }
+            });
+         }
     } else {
         res.render("index");
     }
