@@ -1,5 +1,6 @@
 ﻿var numDays;
 var oneday = 24 * 60 * 60 * 1000;
+var isAdmin;
 
 var totalLeaveCounts = {
     totalSickLeave: 0,
@@ -452,15 +453,15 @@ var user_handler = function () {
           totalLeaveCounts.cfPersonalLeave = data.result[0].cfplcount;
           totalLeaveCounts.cfOtherLeave = data.result[0].cfolcount;
           totalLeaveCounts.totalMaternityLeave = data.result[0].maternitycount;
-          $('#adminValue').val(data.isAdmin);
+          isAdmin = data.isAdmin;
           return callback();    
         });
 }; 
 
 //hide or show  header options based on login type(admin or user)
 function hideOrShowOptions() {
-    var data1 = $('#adminValue').val();
-    if (data1 == 1) {
+    alert(isAdmin);
+    if (isAdmin == 1) {
         $('#homeSettingBtn').css('display', 'block');
         $('#homeApplyLeaveBtn').css('display', 'none');
         $('#homeProfileLeaveBtn').css('display', 'none');
