@@ -248,8 +248,7 @@ $(document).ready(function () {
         $('#main_searchStatus').css('display', 'none');
         $('#main_searchUser').css('display', 'inline');
         var statusId = $(this).attr('id');
-        var data1 = $('#adminValue').val();
-        if (statusId == 'appliedLeaves' && data1 == 1) {
+        if (statusId == 'appliedLeaves' && isAdmin == 1) {
             $('#bulkUpdateStatus').css('display', 'block');
         } else {
             $('#bulkUpdateStatus').css('display', 'none');
@@ -391,7 +390,6 @@ $(document).ready(function () {
     //Remove and add attrubute based on value on loading the page
 var user_handler = function () {
     hideOrShowOptions();
-    var data1 = $('#adminValue').val();
     var selectval = $('#userid').attr('data-test-value');
         //Add and remove radio button
         $("input[type='radio']").removeAttr("checked");
@@ -410,7 +408,7 @@ var user_handler = function () {
     var edate = $('#l_e_d').attr('data-test-value');
         var date2 = convertDate(edate);
         $("#enddate").attr('value', date2);
-            if (data1 == 1) {
+            if (isAdmin == 1) {
                 $('#rejected').removeAttr('disabled');
                 $('#approved').removeAttr('disabled');
             }
@@ -460,7 +458,7 @@ var user_handler = function () {
 
 //hide or show  header options based on login type(admin or user)
 function hideOrShowOptions() {
-    alert(isAdmin);
+   // alert(isAdmin);
     if (isAdmin == 1) {
         $('#homeSettingBtn').css('display', 'block');
         $('#homeApplyLeaveBtn').css('display', 'none');
