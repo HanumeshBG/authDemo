@@ -67,3 +67,7 @@ CREATE TABLE IF NOT EXISTS `adminsetting` (
   `cfolcount` int(11) NOT NULL,
   `maternitycount` int(11) NOT NULL
 );
+
+********** Insert default Value to adminsetting table ***********
+
+INSERT INTO adminsetting(tslcount, cfslcount, tclcount, cfclcount, tplcount, cfplcount, tolcount, cfolcount, maternitycount) VALUES (0,0,0,0,0,0,0,0,0);
