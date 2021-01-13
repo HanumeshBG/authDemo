@@ -4,7 +4,10 @@
 <link href="/stylesheets/main.css" type="text/css" rel="stylesheet" />
 
 
-<div>
-    <h1> <%= err.status %></h1>
-    <h5> <%= err.message %></h5>
+<div class="container" id="errorPage">
+    <div>
+        <h1> <span>Eror Code : </span><%= err.status %></h1>
+        <h5> <%= err.message %></h5>
+    </div>
+    <p><a href="/login"> Click Here</a> Login back.</p>
 </div>

@@ -7,12 +7,20 @@ var totalLeaveCounts = {
     totalCasualLeave: 0,
     totalPersonalLeave: 0,
     totalOtherLeave: 0,
-    totalLeave: 21,
+    totalLeave: 0,
     cfSickLeave: 0,
     cfCasualLeave: 0,
     cfPersonalLeave: 0,
     cfOtherLeave: 0,
     totalMaternityLeave: 0,
+
+    set total1(totalLeave) {
+        this.totalLeave = totalLeave;
+    },
+
+    get total1() {
+        return this.totalLeave;
+    },
 
     set totalSickLeave1(totalSickLeave) {
         this.totalSickLeave = totalSickLeave;
@@ -128,6 +136,47 @@ var leaveCounts = {
         return this.total;
     }
 };
+
+//on load function for leave detail person page
+var leavedetailview = function () {
+    checkAdmin(function () {
+        $('#tnl').text(totalLeaveCounts.totalLeave);
+        $('#tncfl').text(totalLeaveCounts.cfCasualLeave + totalLeaveCounts.cfSickLeave + totalLeaveCounts.cfPersonalLeave + totalLeaveCounts.cfOtherLeave);
+        $('#tcl').text(totalLeaveCounts.totalCasualLeave);
+        $('#tsl').text(totalLeaveCounts.totalSickLeave);
+        $('#tpl').text(totalLeaveCounts.totalPersonalLeave);
+        $('#tol').text(totalLeaveCounts.totalOtherLeave);
+        $('#rcl').text(subtractLeave(totalLeaveCounts.totalCasualLeave, $('#tacl').text()));
+        $('#rsl').text(subtractLeave(totalLeaveCounts.totalSickLeave, $('#tasl').text()));
+        $('#rpl').text(subtractLeave(totalLeaveCounts.totalPersonalLeave, $('#tapl').text()));
+        $('#rol').text(subtractLeave(totalLeaveCounts.totalOtherLeave, $('#taol').text()));
+    });
+};
+
+// on load function for dashboard
+var onloadDashboard = function () {
+    hideOrShowOptions();
+  //call to get total leavecounts for status
+    $.get('/home/dashboard/loadstatus', function (data) {
+        for (var i = 0; i < data.length; i++) {
+            if (data[i].status == 'applied') {
+                $('#appliedLeavesCount').text(data[i].count);
+            } else if (data[i].status == 'approved') {
+                $('#approvedLeavesCount').text(data[i].count);
+            } else {
+                $('#rejectedLeavesCount').text(data[i].count);
+            }
+        }
+    });
+
+    //call to get total leavecounts for users
+    $.get('/home/dashboard/loaduser', function (data) {
+        for (var i = 0; i < data.length; i++) {
+            $('#userTotalLeaveCount' + data[i].id).text(data[i].total);
+        }
+    });
+};
+
 $(document).ready(function () {
     
     checkAdmin(function () {
@@ -232,10 +281,12 @@ $(document).ready(function () {
         $.post('/signup/checkuser', { username: userName }, function (data) {
             if (data == true) {
                 $('#userVerification').html("User name already exists.");
+                $('#userVerification').removeClass('useravilable');
                 $('#userVerification').addClass('userexit');
                 $('#user_name').val("");
             } else {
                 $('#userVerification').html("User name is available.");
+                $('#userVerification').removeClass('userexit');
                 $('#userVerification').addClass('useravilable');
             };
         });
@@ -273,7 +324,7 @@ $(document).ready(function () {
     //check number of leaves available before submit form
     //on applying leave
     $('#leaveForm').on('submit', function () {
-
+       
         var selectedCategory = $("#l_category input[type = 'radio']:checked").val();
         var Cstatus;
         if (selectedCategory == 'sick') {
@@ -451,6 +502,7 @@ var user_handler = function () {
           totalLeaveCounts.cfPersonalLeave = data.result[0].cfplcount;
           totalLeaveCounts.cfOtherLeave = data.result[0].cfolcount;
           totalLeaveCounts.totalMaternityLeave = data.result[0].maternitycount;
+          totalLeaveCounts.totalLeave = data.result[0].tslcount + data.result[0].tclcount + data.result[0].tplcount + data.result[0].tolcount;
           isAdmin = data.isAdmin;
           return callback();    
         });
@@ -489,29 +541,6 @@ function displayPrompt(category, appliedLeaveCount, availableLeave, total) {
     return true;
 }; 
 
-var onloadDashboard = function () {
-    hideOrShowOptions();
-  //call to get total leavecounts for status
-    $.get('/home/dashboard/loadstatus', function (data) {
-        for (var i = 0; i < data.length; i++) {
-            if (data[i].status == 'applied') {
-                $('#appliedLeavesCount').text(data[i].count);
-            } else if (data[i].status == 'approved') {
-                $('#approvedLeavesCount').text(data[i].count);
-            } else {
-                $('#rejectedLeavesCount').text(data[i].count);
-            }
-        }
-    });
-
-    //call to get total leavecounts for users
-    $.get('/home/dashboard/loaduser', function (data) {
-        for (var i = 0; i < data.length; i++) {
-            $('#userTotalLeaveCount' + data[i].id).text(data[i].total);
-        }
-    });
-};
-
 //on load function for admin setting
 var setvalue = function () {
     hideOrShowOptions();
@@ -543,21 +572,7 @@ function dynamicLeaveTable1(data1) {
     $("#leavesDetailsTableDiv").html(table);
 };
 
-//on load function for leave detail person page
-var leavedetailview = function () {
-    checkAdmin(function () {
-        $('#tnl').text(totalLeaveCounts.totalLeave);
-        $('#tncfl').text(totalLeaveCounts.cfCasualLeave + totalLeaveCounts.cfSickLeave + totalLeaveCounts.cfPersonalLeave + totalLeaveCounts.cfOtherLeave);
-        $('#tcl').text(totalLeaveCounts.totalCasualLeave);
-        $('#tsl').text(totalLeaveCounts.totalSickLeave);
-        $('#tpl').text(totalLeaveCounts.totalPersonalLeave);
-        $('#tol').text(totalLeaveCounts.totalOtherLeave);
-        $('#rcl').text(subtractLeave(totalLeaveCounts.totalCasualLeave, $('#tacl').text()));
-        $('#rsl').text(subtractLeave(totalLeaveCounts.totalSickLeave, $('#tasl').text()));
-        $('#rpl').text(subtractLeave(totalLeaveCounts.totalPersonalLeave, $('#tapl').text()));
-        $('#rol').text(subtractLeave(totalLeaveCounts.totalOtherLeave, $('#taol').text()));
-    });
-};
+
 
 //  Calculation for Remaining leave
 function subtractLeave(a, b) {

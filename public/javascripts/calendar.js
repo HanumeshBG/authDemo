@@ -16,7 +16,7 @@ $(document).ready(function () {
         defaultView: 'month',
         editable: true,
         height: 550,
-
+        
         eventClick: function (info) {
             var eventId = info.id;    
             $.get("/home/applyleave/edit?lid=" + eventId, function (leave) {

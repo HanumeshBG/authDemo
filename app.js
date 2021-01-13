@@ -10,13 +10,15 @@ const fileUpload = require('express-fileupload');
 const path = require('path');
 const appError = require('./appError');
 const commonFunction = require('./routes/commonFunction');
-//var mw = require('./customMiddlewares');
+var port = process.env.port || 3010 ;
+//const mw = require('./customMiddlewares');
 var $ = require('jquery');
 var moment = require('moment');
 
 global.cf = commonFunction; //Global variable to access common function across the app
 global.db = connection;
 
+//var checkUserSession = mw.checkUserSession();
 //middlewares
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -40,7 +42,6 @@ const checkUserSession = function(req,res,next){
         next();
     }
 };
-
 
 //routes
 app.get("/", routes.index);
@@ -88,6 +89,6 @@ app.use(function(err,req,res,next){
 });
 
 //Listen to the port
-app.listen(3010, function (req, res) {
+app.listen(port, function (req, res) {
     console.log('Server started..');
 });

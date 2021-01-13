@@ -1,33 +1,36 @@
 ﻿<%- include partial/header %>
-<div class="container" >
-    <div class="row" id="userProfile">
-        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3 toppad" >
+<%- include partial/navbar %>
 
-          <div class="panel panel-info">
-            <div class="panel-heading">
-              <h3 class="panel-title"><%=data[0].first_name%>, <%=data[0].last_name%></h3>
-            </div>
-            <div class="panel-body">
-              <div class="row">
-                <div class="col-md-3 col-lg-3 " align="center"> <img alt="User Pic" src="http://babyinfoforyou.com/wp-content/uploads/2014/10/avatar-300x300.png" class="img-circle img-responsive"> </div>
-                  <div class=" col-md-9 col-lg-9 "> 
-                    <div>
-                        <label>User Name: </label>
-    		            <input type="text" style="border:none" value="<%=data[0].user_name%>" readonly="readonly"/>
-                    </div>
-                    <div>
-                        <label>Phone Number: </label>
-    		            <input type="text" style="border:none" value="<%=data[0].mob_no%>"/>
-                    </div>
-                    <div>
-                        <label>Gender: </label>
-    		            <input type="text" style="border:none" value="<%=data[0].gender%>"/>
-                    </div>
-                </div>
-              </div>
-            </div>
+<div id="userProfile" class="container">
+  <div class="row">
+    <div class="col-sm-4 profileleftpanel">
+      <div class="card" style="width:100%;height:auto">
+        <img class="card-img-top" src="http://localhost:3010/images/defaultImages/defaultUser.png" alt="User Image" style="width:100%;">
+        <div class="card-body">
+          <h3><%=data[0].first_name%>, <%=data[0].last_name%></h3>
+          <div>
+            <label>User Name: </label>
+            <input type="text" style="border:none" value="<%=data[0].user_name%>" readonly="readonly"/>
+          </div>
         </div>
-        </div>
+      </div>
     </div>
+    <div class="col-sm-8 profilerightpanel">
+      <form action="/" method="post" enctype="text/plain">
+        <div class="form-group row">
+          <label class="col-sm-3">Phone Number: </label>
+          <div class="col-sm-6">
+            <input class="form-control" type="text" style="border:none" value="<%=data[0].mob_no%>"/>  
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-3">Gender: </label>
+          <div class="col-sm-6">
+            <input class="form-control" type="text" style="border:none" value="<%=data[0].gender%>"/>  
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
 </div>
  <%- include partial/footer %>

@@ -281,7 +281,7 @@ exports.leaveDetails = function (req, res) {
         db.query(selquery, function (err, result) {
             if (err) {
                 console.log(err);
-            } else {
+            } else {   
                 res.render("leaveDetails", { leaveCountDetails:result });
             }
         });

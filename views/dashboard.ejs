@@ -1,13 +1,14 @@
 ﻿<%- include partial/header %>
+<%- include partial/navbar %>
 <div class="container-fluid" id="dashboard">
     <div class="row">
-        <div class="col-sm-3">
+        <div id="dashboardleftpanel" class="col-sm-3">
             <div class="row">
                 <div class="col-sm-12 menuList" id="usersList">
                     <div class="listTitle"> Users </div>
                     <ul class="listItem">
                         <% for(var i=0; i < users.length; i++) { %>
-                            <li id="<%= users[i].id %>"> <%= users[i].first_name %> <%= users[i].last_name %> <span id="userTotalLeaveCount<%= users[i].id %>" class="badge"></span></li>
+                            <li id="<%= users[i].id %>"> <%= users[i].first_name %> <%= users[i].last_name %> <span id="userTotalLeaveCount<%= users[i].id %>" class="badge badge-pill badge-secondary"></span></li>
                         <% } %>  
                     </ul>
                 </div>
@@ -16,21 +17,21 @@
                 <div class="col-sm-12 menuList" id="statusList">
                     <div class="listTitle"> Leave Status </div>
                     <ul class="listItem">
-                        <li id="appliedLeaves">Applied <span id="appliedLeavesCount" class="badge"></span></li>
-                        <li id="approvedLeaves">Approved <span id="approvedLeavesCount" class="badge"></span></li>
-                        <li id="rejectedLeaves">Rejected <span id="rejectedLeavesCount" class="badge"></span></li>
+                        <li id="appliedLeaves">Applied <span id="appliedLeavesCount" class="badge badge-pill badge-secondary"></span></li>
+                        <li id="approvedLeaves">Approved <span id="approvedLeavesCount" class="badge badge-pill badge-secondary"></span></li>
+                        <li id="rejectedLeaves">Rejected <span id="rejectedLeavesCount" class="badge badge-pill badge-secondary"></span></li>
                     </ul>
                 </div>
             </div>
         </div>   
-        <div class="col-sm-9">
+        <div id="dashboardrightpanel" class="col-sm-9">
             <div id="dashboard_searchOptions">
                 <div id="main_searchUser">
-                    <label for="userSearchInput">Status: </label>
+                    <label for="userSearchInput">User : </label>
                     <input type="text" id="userSearchInput" placeholder="Enter Name.." class="filter">
                 </div>
                 <div id="main_searchStatus">
-                    <label for="statusSearchInput">Status: </label>
+                    <label for="statusSearchInput">Status : </label>
                     <select id="statusSearchInput" class="filter">
                          <option value="">All</option>
                          <option value="applied">Applied</option>
@@ -39,7 +40,7 @@
                     </select> 
                 </div>
                 <div id="main_searchCategory">
-                    <label for="categorySearchInput">Category: </label>
+                    <label for="categorySearchInput">Category : </label>
                     <select id="categorySearchInput" class="filter">
                          <option value="">All</option>
                          <option value="casual">Casual</option>
@@ -49,11 +50,11 @@
                     </select>
                 </div>
                 <div id="main_searchDate">
-                    <label for="l_searchDate">Date:</label>
+                    <label for="l_searchDate">Date :</label>
                     <div id="l_searchDate">
-                        From:
+                        From :
                         <input class="searchDate"  type="date" id="startdateSearch" name="search_sdate" value="" />
-                        TO:
+                        TO :
                         <input class="searchDate" type="date" id="enddateSearch" name="search_edate" value="" />
                     </div>
                 </div>
