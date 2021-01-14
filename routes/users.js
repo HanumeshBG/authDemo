@@ -147,12 +147,12 @@ exports.applyleave = function (req, res) {
                 console.log(fileName);
             } else {
                 files1 = req.files.uploadfiles;
-                files1.mv('public/images/uploadImages/'+files1.name, function(err) {
-                    if (err)
-                      return res.status(500).send(err);
-                })
                 fileName = files1.name;
                 console.log(fileName);
+                files1.mv('public/images/uploadImages/'+fileName, function(err) {
+                    if (err)
+                      return res.status(500).send(err);
+              })   
             }
            
           

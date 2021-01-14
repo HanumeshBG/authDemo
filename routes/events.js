@@ -54,11 +54,11 @@ exports.editLeave = function (req, res) {
      var category = req.body.l_category;
      var sdate = req.body.l_sdate;
      var edate = req.body.l_edate;
-     var file = req.body.files;
+     var file;
      var oneday = 24 * 60 * 60 * 1000;
      var numDays = Math.round(Math.abs((new Date(sdate) - new Date(edate)) / oneday)) + 1;
      var selectsql = "SELECT * FROM users;";
-     var selectQueryNumDays = "SELECT number_days FROM leaves WHERE lid ='" + eventId + "';";
+     var selectQueryNumDays = "SELECT number_days,files FROM leaves WHERE lid ='" + eventId + "';";
      
     //Calculate days difference function
     function calculateDaysDiff(sql, callback) {
@@ -66,7 +66,7 @@ exports.editLeave = function (req, res) {
             if (err) {
                 console.log(err);
             } else {
-                return callback(numDays - result2[0].number_days);
+                return callback({number_days:numDays - result2[0].number_days, files:result2[0].files});
             }
         });
     };
@@ -79,7 +79,12 @@ exports.editLeave = function (req, res) {
     }; 
 
         calculateDaysDiff(selectQueryNumDays, function (result3) {
-            var daysDiff = result3;
+            if(req.files !== null) {
+                file = req.files.uploadfiles.name;
+            } else {
+                file = result3.files;
+            }
+            var daysDiff = result3.number_days;
             var leaveDetails = {
                 status: status,
                 category: category,
