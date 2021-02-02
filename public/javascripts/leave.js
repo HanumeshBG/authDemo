@@ -177,6 +177,12 @@ var onloadDashboard = function () {
     });
 };
 
+//on load function for profile page
+var userProfile = function(){
+    let genderValue = $('#profileGenderHideInput').val();
+    $('#profileGender option[value="' + genderValue + '"]').prop('selected','selected');
+};
+
 $(document).ready(function () {
     
     checkAdmin(function () {
@@ -506,6 +512,23 @@ var user_handler = function () {
           isAdmin = data.isAdmin;
           return callback();    
         });
+
+        //
+
+    // Edit Profile page functions
+    $('#profileEdit').on('click', function(){
+        $('#profileform input').attr('readonly', false);
+        $('#profileabout').attr('readonly', false)
+        $(this).css('display','none');
+        $('#profileSave').css('display','block');
+        $('#profileGender').removeClass('removeCursorPointer');
+    });
+
+    //Save Profile page function
+    $('#profileSave').on('click', function(){
+        $(this).css('display','none');
+        $('#profileEdit').css('display','block');
+    });
 }; 
 
 //hide or show  header options based on login type(admin or user)

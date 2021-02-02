@@ -1,4 +1,8 @@
-﻿var express = require('express');
+﻿if(process.env.NODE_ENV !== 'production') {
+    require('dotenv').config();
+}
+
+var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
 var routes = require('./routes');
@@ -7,10 +11,13 @@ var events = require('./routes/events');
 var connection = require("./config");
 var session = require('express-session');
 const fileUpload = require('express-fileupload');
+//var multer = require('multer');
+//var upload = multer({ dest: 'uploads/'});
 const path = require('path');
 const appError = require('./appError');
 const commonFunction = require('./routes/commonFunction');
 var port = process.env.port || 3010 ;
+//var cloudinary = require('./cloudinaryConfig');
 //const mw = require('./customMiddlewares');
 var $ = require('jquery');
 var moment = require('moment');
@@ -33,7 +40,9 @@ app.use(session({
     cookie: { maxAge: 600000 }
 }));
 
-app.use(fileUpload());
+app.use(fileUpload({
+    useTempFiles: true
+}));
 
 const checkUserSession = function(req,res,next){
     if(req.session.userId == null){
@@ -52,9 +61,10 @@ app.get("/login", routes.index); // Call for login page
 app.post("/login", users.login);// call for login page
 app.get("/home/dashboard",checkUserSession, users.dashboard);//call for dashboard after login
 app.get("/home/profile",checkUserSession, users.profile);//call for profile page
+app.post("/home/profile",checkUserSession, users.editProfile);//call for Edit Profile page
 app.get("/logout", users.logout);//Call for log out
 app.get("/home/applyleave",checkUserSession, users.applyleave);// Call for leave form
-app.post("/home/applyleave",checkUserSession, users.applyleave);// Post Call for leave form
+app.post("/home/applyleave",checkUserSession,users.applyleave);// Post Call for leave form
 app.get("/home/setting",checkUserSession, events.adminSetting);//call Admin setting page 
 app.post("/home/setting",checkUserSession, events.adminSetting);//Post method for admin setting
 app.get("/home/leaveDetails",checkUserSession, events.leaveDetails);//Get request for leaveDetails page

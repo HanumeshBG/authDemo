@@ -245,7 +245,11 @@ table, th, td {
 .profilerightpanel{
     background-color: rgba(0, 0, 0, 0.7) !important;
 }
-
+#profileform input, #profileform select, #profileform textarea {
+    border: none;
+    background-color: rgba(0, 0, 0, 0.7) !important;
+    color: white;
+}
 
 /*----------------- Leave Details Person Page CSS --------------*/
 #leaveDetailsPerson {
@@ -274,4 +278,25 @@ table, th, td {
     text-align: center;
     height: 500px;
     padding-top: 100px;
+}
+
+/* ------------------- General CSS settings ---------- */
+.removeCursorPointer {
+    pointer-events: none;
+}
+
+textarea {
+    resize: none;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
 }

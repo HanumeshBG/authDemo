@@ -193,7 +193,7 @@ exports.loadLeaveStatusCount = function (req, res) {
     });
 };
 
-//----------------------- Retive leave counts basd on user----------------
+//----------------------- Retive leave counts based on user----------------
 exports.loadLeaveUserCount = function (req, res) {
   
     var sqlquery = "SELECT id,count(id) AS total FROM leaves GROUP BY id;";

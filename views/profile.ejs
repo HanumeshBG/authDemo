@@ -14,23 +14,72 @@
           </div>
         </div>
       </div>
+      <div>
+        <button id="profileEdit" class="btn btn-primary" value="edit">Edit Profile</button>
+      </div>
     </div>
     <div class="col-sm-8 profilerightpanel">
-      <form action="/" method="post" enctype="text/plain">
-        <div class="form-group row">
-          <label class="col-sm-3">Phone Number: </label>
-          <div class="col-sm-6">
-            <input class="form-control" type="text" style="border:none" value="<%=data[0].mob_no%>"/>  
+      <div>
+        <form id='profileform' action="/home/profile" method="POST" enctype="multipart/form-data">
+          <div class="form-group row">
+            <label class="col-sm-3">About: </label>
+            <div class="col-sm-6">
+                <textarea name="profileabout" id="profileabout" cols="50" rows="5" readonly="readonly"> <%=data[0].about%> </textarea>
+            </div>
           </div>
-        </div>
-        <div class="form-group row">
-          <label class="col-sm-3">Gender: </label>
-          <div class="col-sm-6">
-            <input class="form-control" type="text" style="border:none" value="<%=data[0].gender%>"/>  
+          <div class="form-group row">
+            <label class="col-sm-3">Gender: </label>
+            <div class="col-sm-6">
+              <select id="profileGender" class="form-control removeCursorPointer" name="gender"/>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
           </div>
-        </div>
-      </form>
+          <div class="form-group row">
+            <label class="col-sm-3">Phone Number: </label>
+            <div class="col-sm-6">
+              <input id="profileMob_no" class="form-control" name="mob_no" type="number" value="<%=data[0].mob_no%>" readonly="readonly"/>  
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-3">Email: </label>
+            <div class="col-sm-6">
+              <input id="profileEmail" class="form-control" name="profileEmail" type="email" value="<%=data[0].email%>" readonly="readonly"/>  
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-3">Address: </label>
+            <div class="col-sm-6">
+              <input id="profileAddress" class="form-control" name="profileAddress" type="text" value="<%=data[0].address%>" readonly="readonly"/>  
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-3">City: </label>
+            <div class="col-sm-6">
+              <input id="profileCity" class="form-control" name="profileCity" type="text" value="<%=data[0].city%>" readonly="readonly"/>  
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-3">State: </label>
+            <div class="col-sm-6">
+              <input id="profileState" class="form-control" name="profileState" type="text" value="<%=data[0].state%>" readonly="readonly"/>  
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-3">Pin: </label>
+            <div class="col-sm-6">
+              <input id="profilePin" class="form-control" name="profilePin" type="number" value="<%=data[0].pin%>" readonly="readonly"/>  
+            </div>
+          </div>
+          <div>
+            <button type="submit" id="profileSave" class="btn btn-primary" value="save" style="display:none">Save</button>
+          </div>
+        </form>
+      </div>
     </div>
   </div>
 </div>
+<input id="profileGenderHideInput" type="hidden" value="<%=data[0].gender%>"/>
  <%- include partial/footer %>
