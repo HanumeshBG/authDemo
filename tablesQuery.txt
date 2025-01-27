@@ -1,3 +1,9 @@
+CREATE DATABASE myusers
+
+ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'hanumeshbg@2011'
+
+*******************
+
 CREATE TABLE IF NOT EXISTS `users` (
   `id` int(5) NOT NULL AUTO_INCREMENT,
   `first_name` varchar(50) NOT NULL,
@@ -79,7 +85,7 @@ CREATE TABLE IF NOT EXISTS `profiledetails` (
   `address` varchar(255),
   `city` varchar(100),
   `state` varchar(100),
-  `pin` int(5) NOT NULL,
+  `pin` int(5),
   PRIMARY KEY (`pid`),
   FOREIGN KEY (`id`) REFERENCES users(`id`)
 );

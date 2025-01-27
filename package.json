@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node app",
-    "dev":"nodemon app.js"
+    "dev": "nodemon app.js"
   },
   "description": "authDemo",
   "author": {
@@ -14,6 +14,7 @@
     "body-parser": "^1.15.0",
     "cookie-parser": "^1.4.0",
     "debug": "^2.2.0",
+    "dotenv": "^16.4.7",
     "ejs": "^2.7.1",
     "express": "^4.14.0",
     "express-fileupload": "^1.2.0",
